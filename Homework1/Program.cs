@@ -8,20 +8,26 @@
 // public class Answer {
 //     static void CompareNumbers(int firstNumber, int secondNumber)
 //     {
-//         if (firstNumber == secondNumber)
-//         {
-//             Console.WriteLine($"Введенные числа равны `{firstNumber}`");
-//         }
+//         Console.WriteLine($"  ");
+
 //         if (firstNumber > secondNumber)
 //         {
-//             Console.WriteLine($"Первое число `{firstNumber}` больше чем второе число `{secondNumber}`");
+//             Console.WriteLine("первое число больше");
 //         }
-//         if (firstNumber < secondNumber)
+//         else if (firstNumber < secondNumber)
 //         {
-//             Console.WriteLine($"Первое число `{firstNumber}` меньше чем второе число `{secondNumber}`");
+//             Console.WriteLine("второе число больше");
 //         }
+//         else
+//         {
+//             Console.WriteLine("числа равны");
+//         }// Введите свое решение ниже
+
+
 //     }
 
+
+//   // Не удаляйте и не меняйте метод Main! 
 //     static public void Main(string[] args) {
 //         int firstNumber, secondNumber;
 
@@ -29,10 +35,12 @@
 //             firstNumber = int.Parse(args[0]);
 //             secondNumber = int.Parse(args[1]);
 //         } else {
-//             firstNumber = 5;
-//             secondNumber = 6;
+//            // Здесь вы можете поменять значения для отправки кода на Выполнение
+//             firstNumber = 3;
+//             secondNumber = 3;
 //         }
 
+//         // Не удаляйте строки ниже
 //         CompareNumbers(firstNumber, secondNumber);
 //     }
 // }
@@ -110,10 +118,10 @@
     // числа от 1 до number (включительно), после каждого числа должен 
     // быть знак пробела.
 
-System.Console.WriteLine("Enter a number");
-int num = Convert.ToInt32(Console.ReadLine());
+// System.Console.WriteLine("Enter a number");
+// int num = Convert.ToInt32(Console.ReadLine());
 
-for (int count = 2; count <= num; count += 2)
-{
-    Console.Write($"{count}\t");
-}
+// for (int count = 2; count <= num; count += 2)
+// {
+    // Console.Write($"{count}\t");  // //Console.Write(count + " ");
+// }
