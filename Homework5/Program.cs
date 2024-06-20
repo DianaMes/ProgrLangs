@@ -290,60 +290,171 @@
 
 // Вариант упрощенный без метода SwapItems
 
+// using System;
+
+// class UserInputToCompileForTest
+// {
+//     // Печать массива
+//     public static void PrintArray(int[,] array)
+//     {
+//         int rowCount = array.GetLength(0);
+//         int colCount = array.GetLength(1);
+
+//         for (int i = 0; i < rowCount; i++)
+//         {
+//             for (int j = 0; j < colCount; j++)
+//             {
+//                 Console.Write(array[i, j] + "  ");
+//             }
+//             Console.WriteLine();
+//         }
+//     }
+
+//     // Обмен первой с последней строкой
+//     public static int[,] SwapFirstLastRows(int[,] array)
+//     {
+//         int rowCount = array.GetLength(0);
+//         int colCount = array.GetLength(1);
+
+//         for (int j = 0; j < colCount; j++)
+//         {
+//             int temp = array[0, j];
+//             array[0, j] = array[rowCount - 1, j];
+//             array[rowCount - 1, j] = temp;
+//         }
+
+//         return array;
+//     }
+
+//     public static void PrintResult(int[,] numbers)
+//     {
+//         numbers = SwapFirstLastRows(numbers);
+//         PrintArray(numbers);
+//     }
+// }
+
+// class Answer
+// {
+//     public static void Main(string[] args)
+//     {
+//         int[,] numbers = new int[,]
+//         {
+//             {1, 2, 3, 4},
+//             {5, 6, 7, 8},
+//             {9, 10, 11, 12}
+//         };
+
+//         UserInputToCompileForTest.PrintResult(numbers);
+//     }
+// }
+
+
+// Задание 3
+// Задайте прямоугольный двумерный массив. Напишите программу, которая будет 
+// находить строку с наименьшей суммой элементов.
+
 using System;
 
+//Тело класса будет написано студентом. Класс обязан иметь статический метод PrintResult()
 class UserInputToCompileForTest
 {
-    // Печать массива
-    public static void PrintArray(int[,] array)
+    /// Вычисление сумм по строкам (на выходе массив с суммами строк)
+    public static int[] SumRows(int[,] array)
     {
-        int rowCount = array.GetLength(0);
-        int colCount = array.GetLength(1);
+      int rows = array.GetLength(0);
+        int cols = array.GetLength(1);
+        int[] sumRows = new int[rows];
 
-        for (int i = 0; i < rowCount; i++)
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < colCount; j++)
+            int sum = 0;
+            for (int j = 0; j < cols; j++)
             {
-                Console.Write(array[i, j] + "  ");
+                sum += array[i, j];
             }
-            Console.WriteLine();
+            sumRows[i] = sum;
         }
+
+        return sumRows;//Напишите свое решение здесь
     }
-
-    // Обмен первой с последней строкой
-    public static int[,] SwapFirstLastRows(int[,] array)
+    
+    // Получение индекса минимального элемента в одномерном массиве
+    public static int MinIndex(int[] array)
     {
-        int rowCount = array.GetLength(0);
-        int colCount = array.GetLength(1);
-
-        for (int j = 0; j < colCount; j++)
+       if (array.Length == 0)
         {
-            int temp = array[0, j];
-            array[0, j] = array[rowCount - 1, j];
-            array[rowCount - 1, j] = temp;
+            throw new ArgumentException("Array cannot be empty.");
         }
 
-        return array;
-    }
+        int minIndex = 0;
+        int minValue = array[0];
 
+        for (int i = 1; i < array.Length; i++)
+        {
+            if (array[i] < minValue)
+            {
+                minValue = array[i];
+                minIndex = i;
+            }
+        }
+
+        return minIndex;//Напишите свое решение здесь
+    }
     public static void PrintResult(int[,] numbers)
-    {
-        numbers = SwapFirstLastRows(numbers);
-        PrintArray(numbers);
+    {   
+       int[] rowSums = SumRows(numbers);
+        int minIndex = MinIndex(rowSums);
+
+        Console.WriteLine(minIndex); //Напишите свое решение здесь
     }
 }
 
+//Не удаляйте и не меняйте класс Answer!
 class Answer
 {
     public static void Main(string[] args)
     {
-        int[,] numbers = new int[,]
-        {
-            {1, 2, 3, 4},
-            {5, 6, 7, 8},
-            {9, 10, 11, 12}
-        };
+        int[,] numbers;
 
+        if (args.Length >= 1)
+        {
+            // Предполагается, что строки разделены запятой и пробелом, а элементы внутри строк разделены пробелом
+            string[] rows = args[0].Split(',');
+
+            int rowCount = rows.Length;
+            int colCount = rows[0].Trim().Split(' ').Length;
+
+            numbers = new int[rowCount, colCount];
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                string[] rowElements = rows[i].Trim().Split(' ');
+
+                for (int j = 0; j < colCount; j++)
+                {
+                    if (int.TryParse(rowElements[j], out int result))
+                    {
+                        numbers[i, j] = result;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error parsing element {rowElements[j]} to an integer.");
+                        return;
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Если аргументов на входе нет, используем примерный массив
+            
+            numbers = new int[,] {
+                {1, 2, 3},
+                {1, 1, 0},
+                {7, 8, 2},
+                {9, 10, 11}
+    };      
+        }
         UserInputToCompileForTest.PrintResult(numbers);
     }
 }
