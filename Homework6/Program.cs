@@ -104,26 +104,42 @@
 // В полученной строке слова должны быть также разделены пробелами.
 
 
-// public class Task4
-// {
-// public static void Main(string[] args)
-// {
-// // Входная строка со словами, разделенными пробелами
-// string input = "Hello my world";
-// // Вызов метода для обращения порядка слов в строке
-// string result = ReverseWords(input);
-// // Вывод результата
-// Console.WriteLine(result);
-// }
-// // Метод для обращения порядка слов в строке
-// public static string ReverseWords(string str)
-// {
-// // Разделение строки на слова
-// string[] words = str.Split(' ');
-// // Обращение порядка слов
-// Array.Reverse(words);
-// // Соединение слов обратно в строку с пробелами
-// return string.Join(" ", words);
-// }
-// }
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Исходная строка с словами, разделенными пробелами
+        string inputString = "Летом деревне в Хорошо";
+
+        // Вызываем метод, который переворачивает слова в строке
+        string reversedWordsString = ReverseWords(inputString);
+
+        // Выводим результат
+        Console.WriteLine("Исходная строка: ");
+        Console.WriteLine(inputString);
+        Console.WriteLine();
+        Console.WriteLine("Строка с перевернутыми словами: ");
+        Console.WriteLine(reversedWordsString);
+    }
+
+    static string ReverseWords(string input)
+    {
+        // Разделяем строку на слова по пробелам
+        string[] words = input.Split(' ');
+
+        // Создаем массив для хранения перевернутых слов
+        string[] reversedWords = new string[words.Length];
+
+        // Идем по словам в обратном порядке и записываем их в новый массив
+        for (int i = 0; i < words.Length; i++)
+        {
+            reversedWords[i] = words[words.Length - 1 - i];
+        }
+
+        // Соединяем слова в строку с пробелами и возвращаем результат
+        return string.Join(" ", reversedWords);
+    }
+}
 
